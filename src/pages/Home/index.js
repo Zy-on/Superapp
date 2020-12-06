@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { formatNumber } from '../../utils/formatNumber';
 import Header from '../../components/Header';
 
 import CodIW from '../../assets/call-of-duty-infinite-warfare.png';
@@ -107,24 +108,6 @@ const Home = () => {
     return amount;
   }, {});
 
-  const handlePriceSort = () => {
-    if (priceOrder === '') {
-      const newData = products.sort((a, b) => {
-        return a.price - b.price;
-      });
-
-      setProducts([...newData]);
-
-      return setPriceOrder('asc');
-    }
-
-    const reversedOrder = products.slice(0).reverse();
-
-    setProducts([...reversedOrder]);
-
-    return setPriceOrder(priceOrder === 'asc' ? 'desc' : 'asc');
-  };
-
   const handleNameSort = () => {
     if (nameOrder === '') {
       const newData = products.sort((a, b) => {
@@ -132,6 +115,10 @@ const Home = () => {
       });
 
       setProducts([...newData]);
+
+      setPriceOrder('');
+
+      setScoreOrder('');
 
       return setNameOrder('asc');
     }
@@ -143,6 +130,28 @@ const Home = () => {
     return setNameOrder(nameOrder === 'asc' ? 'desc' : 'asc');
   };
 
+  const handlePriceSort = () => {
+    if (priceOrder === '') {
+      const newData = products.sort((a, b) => {
+        return a.price - b.price;
+      });
+
+      setProducts([...newData]);
+
+      setNameOrder('');
+
+      setScoreOrder('');
+
+      return setPriceOrder('asc');
+    }
+
+    const reversedOrder = products.slice(0).reverse();
+
+    setProducts([...reversedOrder]);
+
+    return setPriceOrder(priceOrder === 'asc' ? 'desc' : 'asc');
+  };
+
   const handleScoreSort = () => {
     if (scoreOrder === '') {
       const newData = products.sort((a, b) => {
@@ -150,6 +159,10 @@ const Home = () => {
       });
 
       setProducts([...newData]);
+
+      setNameOrder('');
+
+      setPriceOrder('');
 
       return setScoreOrder('asc');
     }
@@ -168,30 +181,30 @@ const Home = () => {
         <FiltersBox>
           <Filters>
             <FilterName onPress={handleNameSort}>
-              <Icon name="font" size={30} color="#ffff" />
+              <Icon name="font" size={25} color="#ffff" />
               <Icon
-                name={nameOrder === 'asc' ? 'long-arrow-down' : 'long-arrow-up'}
-                size={30}
+                name={nameOrder === 'asc' ? 'long-arrow-up' : 'long-arrow-down'}
+                size={25}
                 color="#ffff"
               />
             </FilterName>
             <FilterPrice onPress={handlePriceSort}>
-              <Icon name="dollar" size={30} color="#ffff" />
+              <Icon name="dollar" size={25} color="#ffff" />
               <Icon
                 name={
-                  priceOrder === 'asc' ? 'long-arrow-down' : 'long-arrow-up'
+                  priceOrder === 'asc' ? 'long-arrow-up' : 'long-arrow-down'
                 }
-                size={30}
+                size={25}
                 color="#ffff"
               />
             </FilterPrice>
             <FilterScore onPress={handleScoreSort}>
-              <Icon name="star" size={30} color="#ffff" />
+              <Icon name="star" size={25} color="#ffff" />
               <Icon
                 name={
-                  scoreOrder === 'asc' ? 'long-arrow-down' : 'long-arrow-up'
+                  scoreOrder === 'asc' ? 'long-arrow-up' : 'long-arrow-down'
                 }
-                size={30}
+                size={25}
                 color="#ffff"
               />
             </FilterScore>
@@ -206,7 +219,7 @@ const Home = () => {
               {checkSwitchImage(item.id)}
               <ItemInfo>
                 <Name>{item.name}</Name>
-                <Price>{item.price}</Price>
+                <Price>R${formatNumber(item.price)}</Price>
                 <ScoreBox>
                   <Score>Score:</Score>
                   <Icon name="star" size={17} color="#ffbf00" />
@@ -223,7 +236,7 @@ const Home = () => {
                   <ProductAmount>{productAmount[item.id] || 0}</ProductAmount>
                 </CartButton>
 
-                <ButtonText>Adicionar ao carrinho</ButtonText>
+                <ButtonText>Adicionar item</ButtonText>
               </Buybutton>
             </Item>
           )}

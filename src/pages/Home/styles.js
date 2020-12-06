@@ -123,8 +123,8 @@ export const ProductAmount = styled.Text`
 `;
 
 export const ButtonText = styled.Text`
-  margin-right: 4px;
-  font-size: 10.8px;
+  margin-right: 22px;
+  font-size: 13px;
   font-family: 'Roboto-Medium';
   text-transform: uppercase;
   color: #ffff;

@@ -38,7 +38,7 @@ import {
   Button,
   TextButon,
   Total,
-  Frete,
+  Freight,
 } from './styles';
 
 const Cart = () => {
@@ -46,21 +46,9 @@ const Cart = () => {
 
   const [products, setProducts] = useState([]);
 
+  const [freight, setFreight] = useState(0);
+
   const cartSelector = useSelector(state => state);
-
-  const totalUpdate = cartSelector.reduce((total, product) => {
-    return total + product.price * product.amount;
-  }, 0);
-
-  const freteUpdate = cartSelector.reduce((frete, product) => {
-    if (totalUpdate >= 250) {
-      frete = 0;
-    } else {
-      frete = product.amount * 10;
-    }
-
-    return frete;
-  }, 0);
 
   const checkSwitchImage = id => {
     switch (id) {
@@ -96,9 +84,23 @@ const Cart = () => {
     }
   };
 
+  const totalUpdate = cartSelector.reduce((total, product) => {
+    return total + product.price * product.amount;
+  }, 0);
+
   useEffect(() => {
+    let subTotalAmount = 0;
+
+    cartSelector.map(item => {
+      subTotalAmount += item.amount;
+
+      return item;
+    });
+
+    setFreight(totalUpdate >= 250 ? 0 : subTotalAmount * 10);
+
     setProducts(cartSelector);
-  });
+  }, [cartSelector]);
 
   const dispatch = useDispatch();
 
@@ -138,8 +140,8 @@ const Cart = () => {
                   <MinusButton>
                     <Icon
                       onPress={() => decrement(item)}
-                      name="minus"
-                      size={22}
+                      name="minus-square-o"
+                      size={26}
                       color="#000"
                     />
                   </MinusButton>
@@ -149,8 +151,8 @@ const Cart = () => {
                   <PlusButton>
                     <Icon
                       onPress={() => increment(item)}
-                      name="plus"
-                      size={22}
+                      name="plus-square-o"
+                      size={26}
                       color="#000"
                     />
                   </PlusButton>
@@ -161,7 +163,7 @@ const Cart = () => {
                         dispatch({ type: 'REMOVE_FROM_CART', id: item.id });
                       }}
                       name="trash-o"
-                      size={22}
+                      size={25}
                       color="#000"
                     />
                   </RemoveButton>
@@ -182,13 +184,13 @@ const Cart = () => {
               Subtotal:R$
               {formatNumber(totalUpdate)}
             </SubTotal>
-            <Frete>
+            <Freight>
               Frete: R$
-              {formatNumber(freteUpdate)}
-            </Frete>
+              {formatNumber(freight)}
+            </Freight>
             <Total>
               Total: R$
-              {formatNumber(totalUpdate + freteUpdate)}
+              {formatNumber(totalUpdate + freight)}
             </Total>
           </FooterInfo>
           <Button onPress={() => navigation.navigate('CheckOut')}>
