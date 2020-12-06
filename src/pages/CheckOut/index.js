@@ -8,11 +8,15 @@ import Header from '../../components/Header';
 import {
   Container,
   Content,
-  PersonalInfo,
   Welcome,
+  InfoHeader,
+  PersonalInfo,
   Name,
   LastName,
   Street,
+  HouseInfo,
+  HouseNumber,
+  Complement,
   District,
   State,
   City,
@@ -21,6 +25,7 @@ import {
   Message,
   CardNumber,
   NameInCard,
+  SmallInfo,
   ShelfLife,
   Cvv,
   Footer,
@@ -53,22 +58,29 @@ const CheckOut = () => {
     <Container>
       <Header />
       <Content>
+        <Welcome>Falta pouco para receber seu jogo em casa!</Welcome>
+        <InfoHeader>Informe seus dados pessoais:</InfoHeader>
         <PersonalInfo>
-          <Welcome>Falta pouco para receber seu jogo em casa!</Welcome>
-          <Name>Nome:</Name>
-          <LastName>Sobrenome:</LastName>
-          <Street>Rua:</Street>
-          <District>Bairro:</District>
-          <State>Estado:</State>
-          <City>Cidade:</City>
-          <ZipCode>CEP:</ZipCode>
+          <Name placeholder="Nome" />
+          <LastName placeholder="Sobrenome" />
+          <Street placeholder="Rua" />
+          <HouseInfo>
+            <HouseNumber placeholder="Numero" />
+            <Complement placeholder="Complemento" />
+          </HouseInfo>
+          <District placeholder="Bairro" />
+          <State placeholder="Estado" />
+          <City placeholder="Cidade" />
+          <ZipCode placeholder="CEP" />
         </PersonalInfo>
         <FormOfPayment>
-          <Message>Só falta sua forma de pagamento!</Message>
-          <CardNumber>Numero do cartão:</CardNumber>
-          <NameInCard>Nome impresso no cartão:</NameInCard>
-          <ShelfLife>Validade:</ShelfLife>
-          <Cvv>Codígo de segurança:</Cvv>
+          <Message>Só falta sua forma de pagamento:</Message>
+          <CardNumber placeholder="Numero do cartão" />
+          <NameInCard placeholder="Nome impresso no cartão" />
+          <SmallInfo>
+            <ShelfLife placeholder="Validade" />
+            <Cvv placeholder="CVV" />
+          </SmallInfo>
         </FormOfPayment>
         <Footer>
           <FooterInfo>
@@ -86,10 +98,14 @@ const CheckOut = () => {
               {formatNumber(totalUpdate + freteUpdate)}
             </Total>
           </FooterInfo>
-          <Button>
-            <TextButon>Finalizar pedido</TextButon>
-          </Button>
         </Footer>
+        <Button
+          onPress={() => {
+            alert('Pedido realizado!');
+          }}
+        >
+          <TextButon>Finalizar pedido</TextButon>
+        </Button>
       </Content>
     </Container>
   );

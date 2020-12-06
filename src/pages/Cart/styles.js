@@ -15,62 +15,75 @@ export const ProductTable = styled.FlatList`
 
 export const Item = styled.View`
   width: 100%;
+  padding: 4px;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
   background-color: #ffff;
   border-radius: 4px;
   margin-bottom: 30px;
-  border: 1.5px solid #cf6000;
+  border: 1.5px solid #322e2e;
 `;
 
 export const ItemInfo = styled.View`
   flex: 1;
-  align-items: flex-start;
   justify-content: center;
 `;
 
 export const HowMany = styled.View`
   flex: 1;
-  padding: 3px;
+  padding: 2px;
   margin-top: 10px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 190px;
+  border-bottom-width: 0.8px;
+  border-color: #363232;
 `;
 
-export const MinusButton = styled.View``;
+export const MinusButton = styled.View`
+  padding: 6px;
+`;
 
 export const Quantity = styled.Text``;
 
-export const PlusButton = styled.View``;
+export const PlusButton = styled.View`
+  padding: 6px;
+`;
 
-export const RemoveButton = styled.View``;
-
-export const TotalValue = styled.Text`
-  width: 100%;
-  margin-top: 20px;
-  font-family: 'Roboto-Medium';
-  font-size: 17px;
-  align-self: center;
-  justify-content: center;
+export const RemoveButton = styled.View`
+  padding: 6px;
 `;
 
 export const ProductImage = styled.Image`
-  height: 150px;
+  width: 140px;
+  height: 140px;
 `;
 
 export const ProductTitle = styled.Text`
-  width: 100%;
   font-size: 17px;
+  text-align: center;
   font-family: 'Roboto-Medium';
+  border-bottom-width: 0.8px;
+  border-color: #363232;
 `;
 
 export const ProductValue = styled.Text`
-  padding: 2px;
+  text-align: center;
   font-size: 15px;
+  margin-top: 3px;
   font-family: 'Roboto-Regular';
+  border-bottom-width: 0.8px;
+  border-color: #363232;
+  justify-content: center;
+`;
+
+export const TotalValue = styled.Text`
+  width: 100%;
+  margin-top: 5px;
+  text-align: center;
+  font-family: 'Roboto-Medium';
+  font-size: 17px;
 `;
 
 export const Footer = styled.View`
@@ -78,7 +91,7 @@ export const Footer = styled.View`
   padding: 5px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
-  background-color: #353535;
+  background-color: #494343;
   border: 0.4px solid white;
 `;
 
@@ -104,7 +117,7 @@ export const SubTotal = styled.Text`
   color: #ffff;
 `;
 
-export const Frete = styled.Text`
+export const Freight = styled.Text`
   font-size: 15px;
   font-family: 'Roboto-Regular';
   color: #ffff;
